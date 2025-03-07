@@ -1,2 +1,12 @@
-# liatrio-interview-exercise
-Liatrio Apprenticeship Interview Exercise
+# Liatrio Apprenticeship Interview Exercise
+
+## Overview
+Welcome to my Liatrio Apprenticeship Interview Exercise repository!
+This repository contains a simple Node.js web application built with Express. The app exposes an HTTP API endpoint that returns a minified JSON response with my name (Madison Webb) and a timestamp.
+
+## To-Do List
+- [ ] Develop API Endpoint: Create the Express route to return the JSON response.
+- [ ] Docker Setup: Create, write, and test the Dockerfile.
+- [ ] GitHub Actions Setup: Configure workflows for building, testing, and pushing the Docker image.
+- [ ] Deploy to Cloud: Deploy my app to a cloud platform, most likely to Google Cloud Platform.
+- [ ] Extra Credit: Implement an automated deployment workflow that triggers on changes to the main branch.
