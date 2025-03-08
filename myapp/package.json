@@ -1,0 +1,15 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Madison Webb",
+  "license": "UNLICENSED",
+  "description": "description: Basic app that exposes an HTTP API endpoint that returns minified JSON response with my name (Madison Webb) and a timestamp.",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
