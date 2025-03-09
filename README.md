@@ -6,7 +6,7 @@ This repository contains a simple Node.js web application built with Express. Th
 
 ## To-Do List
 - [x] Develop API Endpoint: Create the Express route to return the JSON response.
-- [ ] Docker Setup: Create, write, and test the Dockerfile.
+- [x] Docker Setup: Create, write, and test the Dockerfile.
 - [ ] GitHub Actions Setup: Configure workflows for building, testing, and pushing the Docker image.
 - [ ] Deploy to Cloud: Deploy my app to a cloud platform, most likely to Google Cloud Platform.
 - [ ] Extra Credit: Implement an automated deployment workflow that triggers on changes to the main branch.
