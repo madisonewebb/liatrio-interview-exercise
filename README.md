@@ -10,3 +10,13 @@ This repository contains a simple Node.js web application built with Express. Th
 - [ ] GitHub Actions Setup: Configure workflows for building, testing, and pushing the Docker image.
 - [ ] Deploy to Cloud: Deploy my app to a cloud platform, most likely to Google Cloud Platform.
 - [ ] Extra Credit: Implement an automated deployment workflow that triggers on changes to the main branch.
+
+## Docker Instructions
+### How to Build the Container Image
+```bash
+docker build -t liatrio-exercise .
+```
+### How to Run the Container
+```bash
+docker run -p 3000:3000 liatrio-exercise
+```
