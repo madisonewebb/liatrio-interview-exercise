@@ -3,7 +3,8 @@ var app = express();
 app.set('json spaces', 0);
 
 app.get('/', function (req, res) {
-  res.json({ message: 'My name is Madison' , timestamp: (new Date()).toISOString() })
+  let timestamp = Date.now();
+  res.json({ message: 'My name is Madison' , timestamp: timestamp })
 });
 
 app.listen(3000, function () {
