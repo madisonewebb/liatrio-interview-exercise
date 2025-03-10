@@ -18,5 +18,5 @@ docker build -t liatrio-exercise .
 ```
 ### How to Run the Container
 ```bash
-docker run -p 3000:3000 liatrio-exercise
+docker run -p 80:80 liatrio-exercise
 ```
