@@ -2,7 +2,7 @@ name: Test and Deploy to Docker Hub
 
 on:
   push:
-    branches: [main]
+    branches: [main, github-actions-testing]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
     
 # Build and Run the Container w/ Docker 
     - name: Build the Docker image
-      run: docker build -t liatrio-exercise .
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
 # Runs tests provided by Liatrio (6/7 will pass)
   test:
