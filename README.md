@@ -1,3 +1,5 @@
+[![Test and Deploy to Docker Hub](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/actions.yml/badge.svg)](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/actions.yml)
+
 # Liatrio Apprenticeship Interview Exercise
 
 ## Overview
