@@ -16,7 +16,7 @@ jobs:
       run: docker build . --file Dockerfile --tag liatrio-exercise:latest
 
     - name: Start the Container
-      run: docker run -d -p 80:80 --name my-app-container liatrio-exercise:latest
+      run: docker run -d -p 80:80 --name app liatrio-exercise:latest
 
 # Runs tests provided by Liatrio
   test:
