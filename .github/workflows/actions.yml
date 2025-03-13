@@ -5,18 +5,30 @@ on:
     branches: [main, github-actions-testing]
 
 jobs:
-  build_and_test:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repo
       uses: actions/checkout@v4
     
-    - name: Run tests
+# Build and Run the Container w/ Docker 
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag liatrio-exercise:latest
+
+    - name: Start the Container
+      run: docker run -d -p 80:80 --name my-app-container liatrio-exercise:latest
+
+# Runs tests provided by Liatrio
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: run tests
+    # Uses version of apprentice-action that does not include unfinished minified JSON test
       uses: liatrio/github-actions/apprentice-action@0b41561cca6822cc8d880fe0e49e7807a41fdf91
   
 # Publish Image to Docker hub
   docker-hub:
-    needs: build_and_test
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
