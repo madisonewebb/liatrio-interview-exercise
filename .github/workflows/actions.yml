@@ -5,27 +5,18 @@ on:
     branches: [main, github-actions-testing]
 
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repo
       uses: actions/checkout@v4
     
-# Build and Run the Container w/ Docker 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-
-# Runs tests provided by Liatrio (6/7 will pass)
-  test:
-    runs-on: ubuntu-latest
-    continue-on-error: true # Allow this job to fail without failing workflow
-    steps:
-    - name: run tests
-      uses: liatrio/github-actions/apprentice-action@master
+    - name: Run tests
+      uses: liatrio/github-actions/apprentice-action@0b41561cca6822cc8d880fe0e49e7807a41fdf91
   
 # Publish Image to Docker hub
   docker-hub:
-    needs: build
+    needs: build_and_test
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
