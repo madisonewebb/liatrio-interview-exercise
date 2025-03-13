@@ -20,6 +20,7 @@ jobs:
 
 # Runs tests provided by Liatrio
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: run tests
@@ -28,7 +29,7 @@ jobs:
   
 # Publish Image to Docker hub
   docker-hub:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
