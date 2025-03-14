@@ -4,7 +4,7 @@ app.set('json spaces', 0);
 
 app.get('/', function (req, res) {
   let timestamp = Date.now();
-  res.json({ message: 'My name is Madison' , timestamp: timestamp })
+  res.json({ message: 'My name is Madison Webb' , timestamp: timestamp })
 });
 
 app.listen(80, function () {

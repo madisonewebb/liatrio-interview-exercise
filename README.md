@@ -3,6 +3,8 @@
 [![Deploy to Production AWS EC2 Instance](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/deploy.yml/badge.svg)](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/deploy.yml)
 
 # Liatrio Apprenticeship Interview Exercise
+**Live Demo:** [http://madisonwebb.net](http://madisonwebb.net)
+
 
 ## Overview
 Welcome to my Liatrio Apprenticeship Interview Exercise repository!
@@ -13,7 +15,7 @@ This repository contains a simple Node.js web application built with Express. Th
 - [x] Docker Setup: Create, write, and test the Dockerfile.
 - [x] GitHub Actions Setup: Configure workflows for building, testing, and pushing the Docker image.
 - [x] Deploy to Cloud: Deploy my app to a cloud platform, most likely to Google Cloud Platform.
-- [ ] Extra Credit: Implement an automated deployment workflow that triggers on changes to the main branch.
+- [x] Extra Credit: Implement an automated deployment workflow that triggers on changes to the main branch.
 
 ## Docker Instructions
 ### How to Build the Container Image
