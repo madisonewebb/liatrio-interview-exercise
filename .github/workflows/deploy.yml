@@ -26,13 +26,13 @@ jobs:
         username: ec2-user
         key: ${{ secrets.SSH_KEY }}
         script: |
-          export NVM_DIR=~/.nvm
-          source ~/.nvm/nvm.sh
-          cd /home/ubuntu/nodejs-ssl-server
-          git stash
-          git pull origin feature/github-action
-          npm install
-          pm2 restart nodejs-ssl-server
+            set -e
+            cd /home/ec2-user/liatrio-interview-exercise
+            git pull origin main
+            docker build -t liatrio-exercise:latest .
+            docker stop app || true
+            docker rm app || true
+            docker run -d -p 80:80 --name app liatrio-exercise:latest
               
     - name: Remove Github Actions IP from security group
       run: |
