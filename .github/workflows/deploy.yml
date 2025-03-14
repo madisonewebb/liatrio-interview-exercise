@@ -34,6 +34,7 @@ jobs:
             docker rm app || true
             docker run -d -p 80:80 --name app liatrio-exercise:latest
               
+            
     - name: Remove Github Actions IP from security group
       run: |
         aws ec2 revoke-security-group-ingress --group-name ${{ secrets.AWS_SG_NAME }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
