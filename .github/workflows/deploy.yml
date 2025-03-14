@@ -1,4 +1,4 @@
-name: ci-cd pipeline deploy to prod
+name: Deploy to Production AWS EC2 Instance
 
 on:
   push:
