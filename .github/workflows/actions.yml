@@ -2,7 +2,7 @@ name: Test and Deploy to Docker Hub
 
 on:
   push:
-    branches: [main, github-actions-testing]
+    branches: [ main ]
 
 jobs:
   build-and-test:
