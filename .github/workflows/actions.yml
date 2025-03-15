@@ -1,41 +1,45 @@
+# This workflow builds, tests, and deploys the Liatrio exercise Docker image.
 name: Run Liatrio Tests and Deploy to Docker Hub
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]  # Trigger the workflow on pushes to the main branch
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner for this job
     steps:
     - name: Check out the repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4  # Clones the repository so subsequent steps can access the code
     
-# Build and Run the Container w/ Docker 
+    # Build and Run the Container with Docker
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag liatrio-exercise:latest
-
+      # Build the Docker image using the specified Dockerfile and tag it as "liatrio-exercise:latest"
+    
     - name: Start the Container
       run: docker run -d -p 80:80 --name app liatrio-exercise:latest
-
-# Runs tests provided by Liatrio
+      # Run the container in detached mode, mapping port 80 of the container to port 80 on the host,
+      # and name the running container "app"
+    
+    # Runs tests provided by Liatrio using a specific GitHub Action
     - name: run tests
-    # Uses version of apprentice-action that does not include unfinished minified JSON test
+      # Uses a specific commit of the Liatrio apprentice-action that omits an unfinished minified JSON test
       uses: liatrio/github-actions/apprentice-action@0b41561cca6822cc8d880fe0e49e7807a41fdf91
   
-# Publish Image to Docker hub
+  # Publish Image to Docker Hub
   docker-hub:
-    needs: build-and-test
-    runs-on: ubuntu-latest
+    needs: build-and-test  # This job depends on the build-and-test job and will run only if it completes successfully
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner for Docker Hub deployment
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v4
-  
+        uses: actions/checkout@v4  # Clones the repository again as it's required for the Docker build
+      
       - uses: mr-smithers-excellent/docker-build-push@v6
         name: Build & push Docker image
         with:
-          image: madisonewebb28/liatrio_exercise_docker
-          tags: v1, latest
-          registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          image: madisonewebb28/liatrio_exercise_docker  # Name of the Docker image on Docker Hub
+          tags: v1, latest  # Tag the image with "v1" and "latest"
+          registry: docker.io  # Specify Docker Hub as the registry
+          username: ${{ secrets.DOCKERHUB_USERNAME }}  # Docker Hub username stored in GitHub secrets
+          password: ${{ secrets.DOCKERHUB_TOKEN }}  # Docker Hub token stored in GitHub secrets for authentication
