@@ -22,7 +22,7 @@ jobs:
       # Run the container in detached mode, mapping port 80 of the container to port 80 on the host,
       # and name the running container "app"
     
-    # Runs tests provided by Liatrio using a specific GitHub Action
+    # Runs tests provided by Liatrio using apprentice-action
     - name: run tests
       # Uses a specific commit of the Liatrio apprentice-action that omits an unfinished minified JSON test
       uses: liatrio/github-actions/apprentice-action@0b41561cca6822cc8d880fe0e49e7807a41fdf91
