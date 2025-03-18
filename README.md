@@ -14,7 +14,7 @@ This repository contains a simple Node.js web application built with Express. Th
 - [x] Develop API Endpoint: Create the Express route to return the JSON response.
 - [x] Docker Setup: Create, write, and test the Dockerfile.
 - [x] GitHub Actions Setup: Configure workflows for building, testing, and pushing the Docker image.
-- [x] Deploy to Cloud: Deploy my app to a cloud platform, most likely to Google Cloud Platform.
+- [x] Deploy to Cloud: Deploy my app to an AWS EC2 instance.
 - [x] Extra Credit: Implement an automated deployment workflow that triggers on changes to the main branch.
 
 ## Docker Instructions
