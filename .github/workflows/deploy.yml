@@ -28,9 +28,9 @@ jobs:
     - name: Deploy to prod server
       uses: appleboy/ssh-action@master  # SSH action to execute commands on the remote server
       with:
-        host: ${{ secrets.HOST_IP }}        # Production server IP address from GitHub secrets
+        host: ${{ secrets.HOST_IP }}
         username: ec2-user                  # Username for SSH connection on EC2
-        key: ${{ secrets.SSH_KEY }}         # SSH key from GitHub secrets for authentication
+        key: ${{ secrets.SSH_KEY }}
         script: |
             set -e
             cd /home/ec2-user/liatrio-interview-exercise
