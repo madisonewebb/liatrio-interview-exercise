@@ -45,8 +45,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}  # Docker Hub token stored in GitHub secrets for authentication
 
   deploy:
+      needs: build-and-test
       runs-on: ubuntu-latest  # Use the latest Ubuntu runner
-
       steps:
       # Step 1: Get the public IP address of the GitHub Actions runner
       - name: Get Github action IP
