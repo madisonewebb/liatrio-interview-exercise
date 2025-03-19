@@ -26,7 +26,7 @@ jobs:
 
     # Step 3: Connect via SSH and deploy the latest code to the production server
     - name: Deploy to prod server
-      uses: appleboy/ssh-action@master  # SSH action to execute commands on the remote server
+      uses: appleboy/ssh-action@v1.2.2  # SSH action to execute commands on the remote server
       with:
         host: ${{ secrets.HOST_IP }}
         username: ec2-user                  # Username for SSH connection on EC2
