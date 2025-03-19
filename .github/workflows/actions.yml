@@ -1,5 +1,5 @@
 # This workflow builds, tests, and deploys the Liatrio exercise Docker image.
-name: Run Liatrio Tests and Deploy to Docker Hub
+name: Build, Test, Deploy Image to Docker Hub, Deploy to Production
 
 on:
   push:
@@ -43,3 +43,49 @@ jobs:
           registry: docker.io  # Specify Docker Hub as the registry
           username: ${{ secrets.DOCKERHUB_USERNAME }}  # Docker Hub username stored in GitHub secrets
           password: ${{ secrets.DOCKERHUB_TOKEN }}  # Docker Hub token stored in GitHub secrets for authentication
+
+  deploy:
+      runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
+      steps:
+      # Step 1: Get the public IP address of the GitHub Actions runner
+      - name: Get Github action IP
+        id: ip
+        uses: haythem/public-ip@v1.2  # Action that retrieves the public IP of the runner
+
+      # Step 2: Add the retrieved IP to the AWS security group, allowing SSH access
+      - name: Add Github Actions IP to Security group
+        run: |
+          aws ec2 authorize-security-group-ingress --group-name ${{ secrets.AWS_SG_NAME }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32    
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # AWS credentials stored in GitHub secrets
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      # Step 3: Connect via SSH and deploy the latest code to the production server
+      - name: Deploy to prod server
+        uses: appleboy/ssh-action@v1.2.2  # SSH action to execute commands on the remote server
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ec2-user                  # Username for SSH connection on EC2
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+              set -e
+              cd /home/ec2-user/liatrio-interview-exercise
+              git pull origin main
+              sudo docker build -t liatrio-exercise:latest .
+              sudo docker stop app || true
+              sudo docker rm app || true
+              sudo docker run -d -p 80:80 --name app liatrio-exercise:latest
+
+      # Step 4: Remove the GitHub Actions runner IP from the AWS security group after deployment
+      - name: Remove Github Actions IP from security group
+        run: |
+          aws ec2 revoke-security-group-ingress --group-name ${{ secrets.AWS_SG_NAME }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        # Ensure this step runs even if previous steps fail
+        if: always()
+

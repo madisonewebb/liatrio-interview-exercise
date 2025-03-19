@@ -1,6 +1,4 @@
-[![Test and Deploy to Docker Hub](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/actions.yml/badge.svg)](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/actions.yml)
-
-[![Deploy to Production AWS EC2 Instance](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/deploy.yml/badge.svg)](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/deploy.yml)
+[![Build, Test, Deploy Image to Docker Hub, Deploy to Production](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/actions.yml/badge.svg)](https://github.com/madisonewebb/liatrio-interview-exercise/actions/workflows/actions.yml)
 
 # Liatrio Apprenticeship Interview Exercise
 **Live Demo:** [http://madisonwebb.net](http://madisonwebb.net)
