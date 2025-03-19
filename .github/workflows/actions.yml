@@ -49,14 +49,13 @@ jobs:
       runs-on: ubuntu-latest  # Use the latest Ubuntu runner
       steps:
       # Step 1: Get the public IP address of the GitHub Actions runner
-      - name: Get Github action IP
-        id: ip
-        uses: haythem/public-ip@v1.2  # Action that retrieves the public IP of the runner
+      - name: Store GitHub Actions Runner IP
+        run: echo "GITHUB_RUNNER_IP=$(curl -s https://checkip.amazonaws.com)" >> $GITHUB_ENV
 
       # Step 2: Add the retrieved IP to the AWS security group, allowing SSH access
       - name: Add Github Actions IP to Security group
         run: |
-          aws ec2 authorize-security-group-ingress --group-name ${{ secrets.AWS_SG_NAME }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32    
+          aws ec2 authorize-security-group-ingress --group-name ${{ secrets.AWS_SG_NAME }} --protocol tcp --port 22 --cidr $GITHUB_RUNNER_IP/32    
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # AWS credentials stored in GitHub secrets
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -81,7 +80,7 @@ jobs:
       # Step 4: Remove the GitHub Actions runner IP from the AWS security group after deployment
       - name: Remove Github Actions IP from security group
         run: |
-          aws ec2 revoke-security-group-ingress --group-name ${{ secrets.AWS_SG_NAME }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+          aws ec2 revoke-security-group-ingress --group-name ${{ secrets.AWS_SG_NAME }} --protocol tcp --port 22 --cidr $GITHUB_RUNNER_IP/32
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
