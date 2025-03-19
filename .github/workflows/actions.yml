@@ -28,7 +28,7 @@ jobs:
       uses: liatrio/github-actions/apprentice-action@0b41561cca6822cc8d880fe0e49e7807a41fdf91
   
   # Publish Image to Docker Hub
-  docker-hub:
+  image-to-docker-hub:
     needs: build-and-test  # This job depends on the build-and-test job and will run only if it completes successfully
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner for Docker Hub deployment
     steps:
@@ -44,7 +44,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}  # Docker Hub username stored in GitHub secrets
           password: ${{ secrets.DOCKERHUB_TOKEN }}  # Docker Hub token stored in GitHub secrets for authentication
 
-  deploy:
+  deploy-to-production:
       needs: build-and-test
       runs-on: ubuntu-latest  # Use the latest Ubuntu runner
       steps:
