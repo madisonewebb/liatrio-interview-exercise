@@ -1,4 +1,4 @@
-# Use a lightweight Node.js image
+# Use a recommended Node.js image
 FROM node:19-bullseye
 
 # Declaring environmental variable for the app
@@ -18,3 +18,5 @@ EXPOSE 80
 
 # Run the application using Node.js
 CMD ["node", "src/app.js"]
+
+
