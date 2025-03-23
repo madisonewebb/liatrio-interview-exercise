@@ -35,7 +35,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4  # Clones the repository again as it's required for the Docker build
       
-      - uses: mr-smithers-excellent/docker-build-push@v6
+      - uses: mr-smithers-excellent/docker-build-push@cfce7b4124dab6e77f5af16ca16eeb03ea9af43c
         name: Build & push Docker image
         with:
           image: madisonewebb28/liatrio_exercise_docker  # Name of the Docker image on Docker Hub
@@ -63,7 +63,7 @@ jobs:
 
       # Step 3: Connect via SSH and deploy the latest code to the production server
       - name: Deploy to prod server
-        uses: appleboy/ssh-action@v1.2.2  # SSH action to execute commands on the remote server
+        uses: appleboy/ssh-action@2ead5e36573f08b82fbfce1504f1a4b05a647c6f
         with:
           host: ${{ secrets.HOST_IP }}
           username: ec2-user                  # Username for SSH connection on EC2
