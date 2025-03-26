@@ -2,7 +2,7 @@
 FROM node:19-bullseye
 
 # Declaring environmental variable for the app
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 
 WORKDIR /app
 # Copy package.json and package-lock.json first (to leverage Docker caching)
