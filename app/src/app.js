@@ -10,7 +10,7 @@ app.set('json spaces', 0);
 // Define route for the root URL ('/') that returns a JSON resonse
 app.get('/', function (req, res) {
   let timestamp = Date.now();
-  res.json({ message: 'My name is Madison Webb' , timestamp: timestamp })
+  res.json({ message: 'My name is Madison' , timestamp: timestamp })
 });
 
 app.listen(80, function () {
