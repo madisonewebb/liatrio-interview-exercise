@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: liatrio-interview-exercise
+  labels:
+    app: liatrio-interview-exercise
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: liatrio-interview-exercise
+  template:
+    metadata:
+      labels:
+        app: liatrio-interview-exercise
+    spec:
+      containers:
+      - name: liatrio-interview-exercise
+        image: madisonewebb/liatrio-interview-exercise:latest
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5

@@ -1,0 +1,24 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: liatrio-interview-exercise
+  description: Simple Node.js web application built with Express that exposes an HTTP API endpoint returning JSON with name and timestamp
+  annotations:
+    github.com/project-slug: madisonewebb/liatrio-interview-exercise
+    backstage.io/kubernetes-label-selector: 'app=liatrio-interview-exercise'
+  tags:
+    - nodejs
+    - express
+    - api
+    - kustomize
+  links:
+    - url: http://madisonwebb.net
+      title: Live Demo
+      icon: dashboard
+    - url: https://github.com/madisonewebb/liatrio-interview-exercise
+      title: Source Repository
+      icon: github
+spec:
+  type: service
+  lifecycle: production
+  owner: madisonewebb
